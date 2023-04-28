@@ -5,43 +5,48 @@
 Для работы бота нужен Python версии не ниже 3.10 и установленное ПО для СУБД - [MySQL](https://dev.mysql.com/downloads/).    
 После установки ПО, необходимо создать пустую базу данных.
 
-1. Переименуйте файл .env.template в .env
-2. Заполните .env файл. Пример:  
+- Склонировать репозиторий
+```shell
+https://github.com/akorsunov23/django_telegram_bot
+```
+- Переименуйте файл .env.template в .env
+- Заполните .env файл. Пример:  
 ```yaml
 BOT_TOKEN = 'токен полученный от @BotFather'
 DB_NAME = 'имя базы данных'
 DB_USER = 'имя пользователя MySql'
 DB_PASSWORD = 'пароль пользователя MySql'
 ```
-Установка виртуального окружения для среды разработки на примере ОС Windows
+- Установка виртуального окружения для среды разработки на примере ОС Windows
 ```shell
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 ```
-Установка виртуального окружения для продовой среды на примере ОС Linux
+- Установка виртуального окружения для продовой среды на примере ОС Linux
 ```shell
 python -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
 ```
 ## Как запустить web-сервер и телеграм бота
+
 Все команды выполняемые через `manage.py` производится в активированном локальном окружение из папки `bot_django/`
 
-Выполнить миграцию базы данных
+- Выполнить миграцию базы данных
 ```shell
 python manage.py makemigrations
 python manage.py migrate
 ```
-Добавить администратора админ-панели Джанго
+- Добавить администратора админ-панели Джанго
 ```shell
 python manage.py createsuperuser
 ```
-Запуск сервера
+- Запуск сервера
 ```shell
 python manage.py runserver
 ```
-Запуск бота
+- Запуск бота
 ```shell
 python manage.py runbot
 ```
