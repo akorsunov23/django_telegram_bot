@@ -1,0 +1,13 @@
+venv/
+/.idea/
+.idea/
+__pycache__/
+*.log
+*.db
+instance/
+.webassets-cache
+.env
+media/image_bottom/first_category
+media/image_bottom/three_category
+media/image_bottom/two_category
+tg_bot/migrations
