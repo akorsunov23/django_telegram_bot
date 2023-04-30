@@ -42,6 +42,10 @@ python manage.py migrate
 ```shell
 python manage.py createsuperuser
 ```
+- Загрузить фикстуру с стандартными сообщениями
+````shell
+python manage.py loaddata message.json
+````
 - Запуск сервера
 ```shell
 python manage.py runserver
