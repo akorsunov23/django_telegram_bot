@@ -17,7 +17,8 @@ from .models import \
     PressBottomTwoCategory, \
     PressBottomBackAndExitTwoCategory, \
     PressBottomThreeCategory, \
-    PressBottomBackAndExitThreeCategory
+    PressBottomBackAndExitThreeCategory, \
+    FileThreeCategory
 
 
 HELP_TEXT = 'Для форматирования текста доступны следующие HTML тэги: ' \
@@ -50,10 +51,16 @@ class ImageTreeInLine(nested_admin.NestedStackedInline):
     max_num = 3
 
 
+class FileTreeInLine(nested_admin.NestedStackedInline):
+    model = FileThreeCategory
+    extra = 0
+    max_num = 1
+
+
 class MessageInline(nested_admin.NestedStackedInline):
     model = MessageThreeCategory
     extra = 0
-    inlines = [ImageTreeInLine, ]
+    inlines = [ImageTreeInLine, FileTreeInLine, ]
 
 
 class StatisticFirstBottom(admin.TabularInline):

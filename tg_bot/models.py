@@ -212,6 +212,17 @@ class ImageThreeCategory(models.Model):
         verbose_name_plural = 'Изображения к 3 категории кнопок'
 
 
+class FileThreeCategory(models.Model):
+    """Модель хранения изображений описания кнопок третьей категории."""
+
+    parent = models.ForeignKey(MessageThreeCategory, on_delete=models.CASCADE, verbose_name='сообщение')
+    image = models.FileField(upload_to='file/three_category', verbose_name='документы к сообщению')
+
+    class Meta:
+        verbose_name = 'Документ к 3 категории кнопок'
+        verbose_name_plural = 'Документы к 3 категории кнопок'
+
+
 class WelcomeMessage(models.Model):
     """Модель хранения приветственного сообщения после регистрации пользователя в боте."""
     message = models.TextField(verbose_name='сообщение')

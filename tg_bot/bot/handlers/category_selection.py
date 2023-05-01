@@ -25,7 +25,8 @@ from tg_bot.models import \
     PressBottomTwoCategory, \
     PressBottomBackAndExitTwoCategory, \
     PressBottomThreeCategory, \
-    PressBottomBackAndExitThreeCategory
+    PressBottomBackAndExitThreeCategory, \
+    FileThreeCategory
 from tg_bot.bot.config import dp, bot
 from tg_bot.bot.utils.state import RegisterUser, ButtonPress
 from tg_bot.bot.utils.filter import filter_queryset
@@ -237,11 +238,7 @@ async def press_three_bottom(callback: types.CallbackQuery, state: FSMContext):
                 media_group = types.MediaGroup()
                 for index in range(len(images)):
                     if index == 0:
-                        media_group.attach_photo(
-                            types.InputFile(images[index].image.path),
-                            caption=message.descriptions,
-                            parse_mode='HTML'
-                        )
+                        media_group.attach_photo(types.InputFile(images[index].image.path))
                     else:
                         media_group.attach_photo(types.InputFile(images[index].image.path))
                 mes = await bot.send_media_group(chat_id=callback.message.chat.id, media=media_group)
@@ -253,7 +250,21 @@ async def press_three_bottom(callback: types.CallbackQuery, state: FSMContext):
                 mes = await bot.send_photo(
                     chat_id=callback.message.chat.id,
                     photo=types.InputFile(image),
+                )
+                list_id_message.append(mes['message_id'])
+            if FileThreeCategory.objects.filter(parent=message.pk).exists():
+                file = FileThreeCategory.objects.get(parent=message.pk)
+                mes = await bot.send_document(
+                    chat_id=callback.message.chat.id,
+                    document=types.InputFile(file.image.path),
                     caption=message.descriptions,
+                    parse_mode='HTML'
+                )
+                list_id_message.append(mes['message_id'])
+            else:
+                mes = await bot.send_message(
+                    chat_id=callback.message.chat.id,
+                    text=message.descriptions,
                     parse_mode='HTML'
                 )
                 list_id_message.append(mes['message_id'])
