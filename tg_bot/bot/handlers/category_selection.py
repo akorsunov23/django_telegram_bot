@@ -1,4 +1,5 @@
 import os
+
 import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bot_django.settings')
@@ -30,7 +31,14 @@ from tg_bot.models import \
 from tg_bot.bot.config import dp, bot
 from tg_bot.bot.utils.state import RegisterUser, ButtonPress
 from tg_bot.bot.utils.filter import filter_queryset
-from tg_bot.bot.keyboards.category import first_category_bottom, two_category_bottom, three_category_bottom
+from tg_bot.bot.keyboards.category import \
+    first_category_bottom, \
+    two_category_bottom, \
+    three_category_bottom, \
+    SMAIL_BOTTOM_BACK, \
+    SMAIL_BOTTOM_EXIT, \
+    TEXT_BOTTOM_BACK, \
+    TEXT_BOTTOM_EXIT
 
 
 @dp.message_handler(state=RegisterUser.end_register, text='start_survey')
@@ -228,8 +236,8 @@ async def press_three_bottom(callback: types.CallbackQuery, state: FSMContext):
         filter_messages = filter_queryset(queryset=messages)
 
         keyboard = types.InlineKeyboardMarkup()
-        keyboard.add(types.InlineKeyboardButton(text='\U00002B05 назад', callback_data='back'))
-        keyboard.add(types.InlineKeyboardButton(text='\U00002B07 покинуть бота', callback_data='exit'))
+        keyboard.add(types.InlineKeyboardButton(text=SMAIL_BOTTOM_BACK + TEXT_BOTTOM_BACK, callback_data='back'))
+        keyboard.add(types.InlineKeyboardButton(text=SMAIL_BOTTOM_EXIT + TEXT_BOTTOM_EXIT, callback_data='exit'))
         list_id_message = list()
 
         for message in filter_messages:
