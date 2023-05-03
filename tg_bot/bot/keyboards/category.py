@@ -5,14 +5,16 @@ from tg_bot.models import FirstCategoryBottom, TwoCategoryBottom, ThreeCategoryB
 def first_category_bottom() -> types.InlineKeyboardMarkup():
     """Кнопки из первой категории."""
 
-    keyboard = types.InlineKeyboardMarkup()
+    keyboard = types.InlineKeyboardMarkup(row_width=2)
     bottoms = FirstCategoryBottom.objects.all()
+    list_bottoms = list()
     for bottom in bottoms:
-        keyboard.insert(types.InlineKeyboardButton(
+        list_bottoms.append(types.InlineKeyboardButton(
             text='\U000023FA ' + bottom.name,
             callback_data=bottom.pk),
 
         )
+    keyboard.add(*list_bottoms)
     keyboard.add(types.InlineKeyboardButton(text='\U00002B07 покинуть бота', callback_data='exit'))
     return keyboard
 
@@ -20,13 +22,15 @@ def first_category_bottom() -> types.InlineKeyboardMarkup():
 def two_category_bottom(id_category: int) -> types.InlineKeyboardMarkup():
     """Кнопки из второй категории."""
 
-    keyboard = types.InlineKeyboardMarkup()
+    keyboard = types.InlineKeyboardMarkup(row_width=2)
     bottoms = TwoCategoryBottom.objects.filter(parent=id_category)
+    list_bottoms = list()
     for bottom in bottoms:
-        keyboard.insert(types.InlineKeyboardButton(
+        list_bottoms.append(types.InlineKeyboardButton(
             text='\U000023FA ' + bottom.name,
             callback_data=bottom.pk)
         )
+    keyboard.add(*list_bottoms)
     keyboard.add(types.InlineKeyboardButton(text='\U00002B05 назад', callback_data='back'))
     keyboard.add(types.InlineKeyboardButton(text='\U00002B07 покинуть бота', callback_data='exit'))
     return keyboard
@@ -35,13 +39,15 @@ def two_category_bottom(id_category: int) -> types.InlineKeyboardMarkup():
 def three_category_bottom(id_category: int) -> types.InlineKeyboardMarkup():
     """Кнопки из третьей категории."""
 
-    keyboard = types.InlineKeyboardMarkup()
+    keyboard = types.InlineKeyboardMarkup(row_width=2)
     bottoms = ThreeCategoryBottom.objects.filter(parent=id_category)
+    list_bottoms = list()
     for bottom in bottoms:
-        keyboard.insert(types.InlineKeyboardButton(
+        list_bottoms.append(types.InlineKeyboardButton(
             text='\U000023FA ' + bottom.name,
             callback_data=bottom.pk)
         )
+    keyboard.add(*list_bottoms)
     keyboard.add(types.InlineKeyboardButton(text='\U00002B05 назад', callback_data='back'))
     keyboard.add(types.InlineKeyboardButton(text='\U00002B07 покинуть бота', callback_data='exit'))
     return keyboard
