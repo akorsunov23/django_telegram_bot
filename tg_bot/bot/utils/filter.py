@@ -32,7 +32,9 @@ def filter_queryset(queryset: QuerySet) -> list:
             if ship_from < date_now < ship_to:
                 result.append(query)
         else:
-            if query.ship_to < date_now:
+            if query.ship_to > date_now:
+                result.append(query)
+            else:
                 MessageThreeCategory.objects.get(pk=query.pk).delete()
 
     return result
