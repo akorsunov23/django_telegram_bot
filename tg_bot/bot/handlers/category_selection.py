@@ -238,7 +238,11 @@ async def press_three_bottom(callback: types.CallbackQuery, state: FSMContext):
                 media_group = types.MediaGroup()
                 for index in range(len(images)):
                     if index == 0:
-                        media_group.attach_photo(types.InputFile(images[index].image.path))
+                        media_group.attach_photo(
+                            types.InputFile(images[index].image.path),
+                            caption=message.descriptions,
+                            parse_mode='HTML'
+                        )
                     else:
                         media_group.attach_photo(types.InputFile(images[index].image.path))
                 mes = await bot.send_media_group(chat_id=callback.message.chat.id, media=media_group)
@@ -250,6 +254,8 @@ async def press_three_bottom(callback: types.CallbackQuery, state: FSMContext):
                 mes = await bot.send_photo(
                     chat_id=callback.message.chat.id,
                     photo=types.InputFile(image),
+                    caption=message.descriptions,
+                    parse_mode='HTML'
                 )
                 list_id_message.append(mes['message_id'])
             if FileThreeCategory.objects.filter(parent=message.pk).exists():
@@ -257,15 +263,6 @@ async def press_three_bottom(callback: types.CallbackQuery, state: FSMContext):
                 mes = await bot.send_document(
                     chat_id=callback.message.chat.id,
                     document=types.InputFile(file.image.path),
-                    caption=message.descriptions,
-                    parse_mode='HTML'
-                )
-                list_id_message.append(mes['message_id'])
-            else:
-                mes = await bot.send_message(
-                    chat_id=callback.message.chat.id,
-                    text=message.descriptions,
-                    parse_mode='HTML'
                 )
                 list_id_message.append(mes['message_id'])
 
