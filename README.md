@@ -7,20 +7,35 @@
 
 - Склонировать репозиторий
 ```shell
-https://github.com/akorsunov23/django_telegram_bot
+git clone https://github.com/akorsunov23/django_telegram_bot
+```
+- Перейти в папку проекта
+```shell
+cd django_telegram_bot
 ```
 - Переименуйте файл .env.template в .env
 - Заполните .env файл. Пример:  
 ```yaml
 BOT_TOKEN = 'токен полученный от @BotFather'
-DB_NAME = 'имя базы данных'
-DB_USER = 'имя пользователя MySql'
-DB_PASSWORD = 'пароль пользователя MySql'
 ```
 - Установка виртуального окружения для среды разработки на примере ОС Windows
 ```shell
 python -m venv venv
-venv\Scripts\activate
+```
+- Перейти в директорию виртуального окружения
+```shell
+cd venv\Scripts\
+```
+- Активировать виртуальное окружение
+```shell
+activate
+```
+- Перейти в папку проекта
+```shell
+cd ..\..
+```
+- Установить все зависимости
+```shell
 pip install -r requirements.txt
 ```
 - Установка виртуального окружения для продовой среды на примере ОС Linux
@@ -31,7 +46,7 @@ pip install -r requirements.txt
 ```
 ## Как запустить web-сервер и телеграм бота
 
-Все команды выполняемые через `manage.py` производится в активированном локальном окружение из папки `bot_django/`
+Все команды выполняемые через `manage.py` производится в активированном виртуальном окружение из папки `django_telegram_bot/`
 
 - Выполнить миграцию базы данных
 ```shell
