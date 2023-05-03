@@ -8,7 +8,7 @@ def first_category_bottom() -> types.InlineKeyboardMarkup():
     keyboard = types.InlineKeyboardMarkup()
     bottoms = FirstCategoryBottom.objects.all()
     for bottom in bottoms:
-        keyboard.add(types.InlineKeyboardButton(
+        keyboard.insert(types.InlineKeyboardButton(
             text='\U000023FA ' + bottom.name,
             callback_data=bottom.pk),
 
@@ -23,7 +23,7 @@ def two_category_bottom(id_category: int) -> types.InlineKeyboardMarkup():
     keyboard = types.InlineKeyboardMarkup()
     bottoms = TwoCategoryBottom.objects.filter(parent=id_category)
     for bottom in bottoms:
-        keyboard.add(types.InlineKeyboardButton(
+        keyboard.insert(types.InlineKeyboardButton(
             text='\U000023FA ' + bottom.name,
             callback_data=bottom.pk)
         )
@@ -38,7 +38,7 @@ def three_category_bottom(id_category: int) -> types.InlineKeyboardMarkup():
     keyboard = types.InlineKeyboardMarkup()
     bottoms = ThreeCategoryBottom.objects.filter(parent=id_category)
     for bottom in bottoms:
-        keyboard.add(types.InlineKeyboardButton(
+        keyboard.insert(types.InlineKeyboardButton(
             text='\U000023FA ' + bottom.name,
             callback_data=bottom.pk)
         )

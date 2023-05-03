@@ -228,8 +228,8 @@ async def press_three_bottom(callback: types.CallbackQuery, state: FSMContext):
         filter_messages = filter_queryset(queryset=messages)
 
         keyboard = types.InlineKeyboardMarkup()
-        keyboard.add(types.InlineKeyboardButton(text='назад', callback_data='back'))
-        keyboard.add(types.InlineKeyboardButton(text='покинуть бота', callback_data='exit'))
+        keyboard.add(types.InlineKeyboardButton(text='\U00002B05 назад', callback_data='back'))
+        keyboard.add(types.InlineKeyboardButton(text='\U00002B07 покинуть бота', callback_data='exit'))
         list_id_message = list()
 
         for message in filter_messages:
@@ -240,7 +240,7 @@ async def press_three_bottom(callback: types.CallbackQuery, state: FSMContext):
                     if index == 0:
                         media_group.attach_photo(
                             types.InputFile(images[index].image.path),
-                            caption=message.descriptions,
+                            caption=message.descriptions.format(name=user.name),
                             parse_mode='HTML'
                         )
                     else:
@@ -254,7 +254,7 @@ async def press_three_bottom(callback: types.CallbackQuery, state: FSMContext):
                 mes = await bot.send_photo(
                     chat_id=callback.message.chat.id,
                     photo=types.InputFile(image),
-                    caption=message.descriptions,
+                    caption=message.descriptions.format(name=user.name),
                     parse_mode='HTML'
                 )
                 list_id_message.append(mes['message_id'])

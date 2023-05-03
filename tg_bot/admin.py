@@ -30,7 +30,7 @@ HELP_TEXT = 'Для форматирования текста доступны �
             '&lta href="ссылка"&gtтекст&lt/a&gt - гиперссылка, ' \
             'для эмодзи необходимо использовать их представление в HTML коде. ' \
             '{name} - используется для добавления имени пользователя. ' \
-            '{message} - используется для добавления текста присланного сообщения.'
+
 
 
 class ImageFirstInline(admin.TabularInline):
@@ -201,7 +201,8 @@ class ErrorMessageAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super().get_form(request, obj=obj, change=change, **kwargs)
-        form.base_fields['message'].help_text = HELP_TEXT
+        form.base_fields['message'].help_text = \
+            HELP_TEXT + '{message} - используется для добавления текста присланного сообщения.'
         return form
 
     def has_delete_permission(self, request, obj=None):
